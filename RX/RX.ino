@@ -1,4 +1,4 @@
-#include <Servo.h>
+  #include <Servo.h>
 
 #include <SPI.h>
 #include "printf.h"
@@ -19,10 +19,12 @@ float payload = 0.0;
 
 // Declaration Servo pos
 unsigned int SteerPos, ThruttlePos, BreakPos, PedalPos;
+bool Reverse = false;
+int count_reverse = 0;
 
 
 struct RF_MESSAGE {
-  int a, b, c;  
+  int a, b;  
 };
 
 
@@ -50,22 +52,23 @@ void loop() {
     radio.read(&msg, sizeof(msg));
     Serial.println(F("Message received:"));
     Serial.println(msg.a);
-    Serial.println(msg.b);
-    Serial.println(msg.c);
+    Serial.println(msg.b);   
+    Pedal.write( msg.a);
     
-    SteerPos = map(msg.a, 0 ,1024, 0, 80);
-    ThruttlePos = map(msg.b, 0 ,1024, 1350, 1450);
-    BreakPos = map(msg.c, 0 ,1024, 1250, 1200);    
+//    ThruttlePos= map(msg.a, 0 ,457, 1350, 1450); 
+//    BreakPos = map(msg.b, 0 ,515, 1250, 1200);
+//    SteerPos=  map(msg.c, 40 ,800, 5, 80);    
+    
+//    Serial.println(ThruttlePos);    
 //    Serial.println(BreakPos);    
+//    Serial.println(SteerPos);    
 //    PedalPos = map(PedalPos, BreakPos, ThruttlePos, BreakPos);
-    Serial.println("");
-    Serial.println(ThruttlePos ^ BreakPos );
+//    Serial.println("");
+//    Serial.println(ThruttlePos ^ BreakPos );
     
-    Steer.write(SteerPos);
-//    Pedal.write(ThruttlePos);
-    Pedal.write(BreakPos);
+//    Steer.write(SteerPos);
 
-    
+//    return msg;
   }
 
 }
