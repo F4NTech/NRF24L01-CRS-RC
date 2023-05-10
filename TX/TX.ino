@@ -45,7 +45,7 @@ void loop() {
   if (msg.a > 50) {
     count_r = 0;
     reverse = false;
-    val.p = map(msg.a, 0 , 457, 1300, 1500);
+    val.p = map(msg.a, 0 , 457, 1300, 1600);
     Serial.println(msg.a);
   }
   if (msg.b > 100 && msg.a < 100 && count_r == 0) {
@@ -58,7 +58,7 @@ void loop() {
   }
 
   if (reverse && msg.b > 100) {
-    val.p = map(msg.b, 0 , 520, 1400, 1200);
+    val.p = map(msg.b, 0 , 500, 1400, 1200);
     Serial.println(msg.b);
   }  
 //  Serial.println(count_r );
